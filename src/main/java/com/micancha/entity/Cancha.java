@@ -13,7 +13,7 @@ public class Cancha {
     @Column(nullable = false, length = 120)
     private String nombre;
 
-    @Column(nullable = false, length = 500)
+    @Column(nullable = false, length = 500, name = "imagen_url")
     private String imagenUrl;
 
     @Column(nullable = false, length = 1000)
@@ -22,7 +22,7 @@ public class Cancha {
     @Column(nullable = false, length = 500)
     private String direccion;
 
-    @Column(nullable = false, length = 500)
+    @Column(nullable = false, length = 500, name = "direccion_url")
     private String direccionUrl;
 
     @Column(nullable = false, length = 80)
@@ -34,7 +34,7 @@ public class Cancha {
     @Column(nullable = false, length = 80)
     private String categoria;
 
-    @Column(precision = 10, scale = 2, nullable = false)
+    @Column(precision = 10, scale = 2, nullable = false, name = "precio_hora")
     private BigDecimal precioHora;
 
     @Column(nullable = false, length = 20)
