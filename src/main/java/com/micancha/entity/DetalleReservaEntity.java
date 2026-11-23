@@ -15,7 +15,7 @@ import java.time.LocalTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DetalleReserva {
+public class DetalleReservaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,9 +41,9 @@ public class DetalleReserva {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "reserva_id", nullable = false)
-    private Reserva reserva;
+    private ReservaEntity reservaEntity;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cancha_id", nullable = false)
-    private Cancha cancha;
+    private CanchaEntity canchaEntity;
 }

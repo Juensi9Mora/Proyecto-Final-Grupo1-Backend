@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "usuarios")
-public class Usuario {
+public class UsuarioEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,9 +27,9 @@ public class Usuario {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rol_id")
-    private Rol rol;
+    private RolEntity rolEntity;
 
-    public Usuario() {
+    public UsuarioEntity() {
     }
 
     public Long getId() {
@@ -80,11 +80,11 @@ public class Usuario {
         this.estado = estado;
     }
 
-    public Rol getRol() {
-        return rol;
+    public RolEntity getRol() {
+        return rolEntity;
     }
 
-    public void setRol(Rol rol) {
-        this.rol = rol;
+    public void setRol(RolEntity rolEntity) {
+        this.rolEntity = rolEntity;
     }
 }

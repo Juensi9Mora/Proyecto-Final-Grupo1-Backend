@@ -1,18 +1,18 @@
 package com.micancha.service;
 
-import com.micancha.entity.Cancha;
+import com.micancha.entity.CanchaEntity;
 
 import java.util.List;
 
 public interface CanchaService {
 
-    List<Cancha> findAll();
-    Cancha findById(Long id);
-    Cancha save(Cancha cancha);
-    Cancha update(Long id, Cancha cancha);
+    List<CanchaEntity> findAll();
+    CanchaEntity findById(Long id);
+    CanchaEntity save(CanchaEntity canchaEntity);
+    CanchaEntity update(Long id, CanchaEntity canchaEntity);
     void deleteById(Long id);
-    List<Cancha> findByNombre(String nombre);
-    List<Cancha> findByCiudad(String ciudad);
-    List<Cancha> findByCategoria(String categoria);
-    List<Cancha> findByEstado(String estado);
+    List<CanchaEntity> findByNombre(String nombre);
+    List<CanchaEntity> findByCiudad(String ciudad);
+    List<CanchaEntity> findByCategoria(String categoria);
+    List<CanchaEntity> findByEstado(String estado);
 }

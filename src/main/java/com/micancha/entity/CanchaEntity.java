@@ -4,7 +4,7 @@ import jakarta.persistence.*;import java.math.BigDecimal;
 
 @Entity
 @Table(name = "canchas")
-public class Cancha {
+public class CanchaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +40,7 @@ public class Cancha {
     @Column(nullable = false, length = 20)
     private String estado;
 
-    public Cancha() {
+    public CanchaEntity() {
     }
 
     public Long getId() {

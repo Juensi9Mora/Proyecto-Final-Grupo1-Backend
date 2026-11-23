@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "roles")
-public class Rol {
+public class RolEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,7 +13,7 @@ public class Rol {
     @Column(nullable = false, length = 50)
     private String tipo;
 
-    public Rol() {
+    public RolEntity() {
     }
 
     public Long getId() {

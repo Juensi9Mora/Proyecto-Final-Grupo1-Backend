@@ -38,10 +38,10 @@ La base de datos **`mi_cancha_db`** está diseñada bajo un modelo relacional
 normalizado compuesto por 5 entidades principales:
 
 1. **`roles`:** Define los niveles de acceso dentro de la plataforma (`CLIENTE`, `ADMIN`, `PROPIETARIO`, `MODERADOR`, `INVITADO`).
-2. **`usuarios`:** Almacena la información de registro, credenciales y rol asignado a cada usuario.
+2. **`usuarios`:** Almacena la información de registro, credenciales y rolEntity asignado a cada usuario.
 3. **`deportes`:** Catálogo de disciplinas deportivas disponibles (Fútbol, Baloncesto, Fútbol Americano, Volleyball, Tenis).
 4. **`canchas`:** Inventario de escenarios deportivos con su ubicación, tarifa por hora, estado de disponibilidad y recursos visuales.
-5. **`reservas`:** Registro transaccional que vincula a un usuario con una cancha en una fecha y franja horaria específica.
+5. **`reservas`:** Registro transaccional que vincula a un usuario con una canchaEntity en una fecha y franja horaria específica.
 
 ---
 
@@ -49,4 +49,4 @@ normalizado compuesto por 5 entidades principales:
 
 Proyecto desarrollado de forma colaborativa para la gestión integral de reservas deportivas.
 
-* **Repositorio Frontend:** [https://github.com/Juensi9Mora/Proyecto-Final-Grupo1.git]  (https://mi-cancha-g1.vercel.app)
+* **Repositorio Frontend:** [https://github.com/Juensi9Mora/Proyecto-Final-Grupo1.git]  (https://mi-canchaEntity-g1.vercel.app)
