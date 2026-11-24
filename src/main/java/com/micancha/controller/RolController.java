@@ -1,5 +1,6 @@
 package com.micancha.controller;
 
+import com.micancha.dto.RolDto;
 import com.micancha.entity.RolEntity;
 import com.micancha.service.RolService;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,26 +26,29 @@ public class RolController {
 
     // Ruta 1: GET /roles → todos los roles
     @GetMapping
-    public List<RolEntity> getAllRoles() {
-        return rolService.findAll();
+    public List<RolDto> getAllRoles() {
+        return rolService.findAll()
+                .stream()
+                .map(RolDto::fromEntity)
+                .toList();
     }
 
     // Ruta 2: GET /roles/{id} → un rol por id
     @GetMapping("/{id}")
-    public RolEntity getRolById(@PathVariable Long id) {
-        return rolService.findById(id);
+    public RolDto getRolById(@PathVariable Long id) {
+        return RolDto.fromEntity(rolService.findById(id));
     }
 
     // Ruta 3: POST /roles → crear un rol
     @PostMapping
-    public RolEntity createRol(@RequestBody RolEntity rol) {
-        return rolService.save(rol);
+    public RolDto createRol(@RequestBody RolEntity rol) {
+        return RolDto.fromEntity(rolService.save(rol));
     }
 
     // Ruta 4: PUT /roles/{id} → editar un rol
     @PutMapping("/{id}")
-    public RolEntity updateRol(@PathVariable Long id, @RequestBody RolEntity rol) {
-        return rolService.update(id, rol);
+    public RolDto updateRol(@PathVariable Long id, @RequestBody RolEntity rol) {
+        return RolDto.fromEntity(rolService.update(id, rol));
     }
 
     // Ruta 5: DELETE /roles/{id} → eliminar un rol
