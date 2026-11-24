@@ -41,9 +41,9 @@ public class DetalleReservaEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "reserva_id", nullable = false)
-    private ReservaEntity reservaEntity;
+    private ReservaEntity reserva;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cancha_id", nullable = false)
-    private CanchaEntity canchaEntity;
+    private CanchaEntity cancha;
 }
