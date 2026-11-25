@@ -13,6 +13,7 @@ public interface DetalleReservaMapper {
 
     @Mapping(source = "cancha.id", target = "canchaId")
     @Mapping(source = "cancha.nombre", target = "canchaNombre")
+    @Mapping(source = "fechaReserva", target = "fechaReserva")
     @Mapping(source = "horaInicio", target = "horaInicio")
     @Mapping(source = "cantidadHoras", target = "cantidadHoras")
     @Mapping(source = "metodoPago", target = "metodoPago", qualifiedByName = "stringToMetodoPago")

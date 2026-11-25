@@ -1,7 +1,6 @@
 package com.micancha.service;
 
 import com.micancha.dto.DetalleReservaDto;
-import com.micancha.entity.DetalleReservaEntity;
 import com.micancha.mapper.DetalleReservaMapper;
 import com.micancha.repository.DetalleReservaRepository;
 import org.springframework.stereotype.Service;

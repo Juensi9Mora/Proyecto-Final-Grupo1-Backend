@@ -1,7 +1,6 @@
 package com.micancha.controller;
 
 import com.micancha.dto.DetalleReservaDto;
-import com.micancha.entity.DetalleReservaEntity;
 import com.micancha.service.DetalleReservaServiceJPA;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,19 +19,33 @@ public class DetalleReservaController {
     public DetalleReservaController(DetalleReservaServiceJPA detalleReservaServiceJPA) {
         this.detalleReservaServiceJPA = detalleReservaServiceJPA;
     }
-
     @GetMapping
-    public ResponseEntity<List<DetalleReservaDto>> getAll(){
+    public ResponseEntity<List<DetalleReservaDto>> getAll() {
         return ResponseEntity.ok(this.detalleReservaServiceJPA.getAll());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<DetalleReservaDto> getById(@PathVariable Long id){
-        DetalleReservaDto dto = this.detalleReservaServiceJPA.getById(id);
+        @GetMapping("/{id}")
+        public ResponseEntity<DetalleReservaDto> getById (@PathVariable Long id){
+            DetalleReservaDto responseDto = this.detalleReservaServiceJPA.getById(id);
 
-        if(dto == null) {
-            return ResponseEntity.notFound().build();
+            if (responseDto == null) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(responseDto);
         }
-        return ResponseEntity.ok(dto);
-    }
 }
+/*
+    @GetMapping("/mostrarreservas")
+    public ResponseEntity<MensajeDto> getAll() {
+        MensajeDto mensaje = new MensajeDto();
+        List<DetalleReservaDto> list;
+        list = this.detalleReservaServiceJPA.getAll();
+
+        mensaje.setCode("0");
+        mensaje.setMensaje("Lista de reservas");
+        mensaje.setDato(list);
+
+        return ResponseEntity.ok(mensaje);
+    }
+    */
+
