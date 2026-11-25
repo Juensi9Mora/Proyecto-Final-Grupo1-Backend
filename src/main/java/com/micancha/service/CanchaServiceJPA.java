@@ -2,18 +2,22 @@ package com.micancha.service;
 
 import com.micancha.entity.CanchaEntity;
 import com.micancha.repository.CanchaRepository;
-import jakarta.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
 @Primary
-public class CanchaServiceJPA implements CanchaService{
+public class CanchaServiceJPA implements CanchaService {
 
     private final CanchaRepository canchaRepository;
 
+    @Autowired
     public CanchaServiceJPA(CanchaRepository canchaRepository) {
         this.canchaRepository = canchaRepository;
     }
@@ -30,39 +34,50 @@ public class CanchaServiceJPA implements CanchaService{
     }
 
     @Override
-    public CanchaEntity save(CanchaEntity canchaEntity) {
-        if (canchaEntity.getEstado() == null || canchaEntity.getEstado().isBlank()) {
-            canchaEntity.setEstado("ACTIVA");
-        };
-        return canchaRepository.save(canchaEntity);
+    @Transactional
+    public CanchaEntity save(CanchaEntity cancha) {
+        cancha.setEstado("ACTIVA");
+
+        return canchaRepository.save(cancha);
     }
 
     @Override
-    public CanchaEntity update(Long id, CanchaEntity canchaEntityActualizada) {
+    @Transactional
+    public CanchaEntity update(Long id, CanchaEntity canchaActualizada) {
+
         CanchaEntity existente = canchaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cancha no encontrada con ID: " + id));
+                .orElseThrow(() -> new RuntimeException("Cancha no encontrada con ID: " + id)
+                );
 
-        existente.setNombre(canchaEntityActualizada.getNombre());
-        existente.setImagenUrl(canchaEntityActualizada.getImagenUrl());
-        existente.setDescripcion(canchaEntityActualizada.getDescripcion());
-        existente.setDireccion(canchaEntityActualizada.getDireccion());
-        existente.setDireccionUrl(canchaEntityActualizada.getDireccionUrl());
-        existente.setPais(canchaEntityActualizada.getPais());
-        existente.setCiudad(canchaEntityActualizada.getCiudad());
-        existente.setCategoria(canchaEntityActualizada.getCategoria());
-        existente.setPrecioHora(canchaEntityActualizada.getPrecioHora());
-        existente.setEstado(canchaEntityActualizada.getEstado());
+        existente.setNombre(canchaActualizada.getNombre());
+        existente.setImagenUrl(canchaActualizada.getImagenUrl());
+        existente.setDescripcion(canchaActualizada.getDescripcion());
+        existente.setDireccion(canchaActualizada.getDireccion());
+        existente.setDireccionUrl(canchaActualizada.getDireccionUrl());
+        existente.setPais(canchaActualizada.getPais());
+        existente.setCiudad(canchaActualizada.getCiudad());
+        existente.setCategoria(canchaActualizada.getCategoria());
+        existente.setPrecioHora(canchaActualizada.getPrecioHora());
 
+        if (canchaActualizada.getEstado() != null) {
+            existente.setEstado(canchaActualizada.getEstado());
+        }
         return canchaRepository.save(existente);
     }
 
     @Override
     @Transactional
     public void deleteById(Long id) {
+
         if (!canchaRepository.existsById(id)) {
             throw new RuntimeException("Cancha no encontrada con ID: " + id);
         }
         canchaRepository.deleteById(id);
+    }
+
+    @Override
+    public List<CanchaEntity> findByEstado(String estado) {
+        return canchaRepository.findByEstado(estado);
     }
 
     @Override
@@ -72,16 +87,26 @@ public class CanchaServiceJPA implements CanchaService{
 
     @Override
     public List<CanchaEntity> findByCiudad(String ciudad) {
-        return canchaRepository.findByCiudadIgnoreCase(ciudad);
+        return canchaRepository.findByCiudad(ciudad);
     }
 
     @Override
     public List<CanchaEntity> findByCategoria(String categoria) {
-        return canchaRepository.findByCategoriaIgnoreCase(categoria);
+        return canchaRepository.findByCategoria(categoria);
     }
 
     @Override
-    public List<CanchaEntity> findByEstado(String estado) {
-        return canchaRepository.findByEstadoIgnoreCase(estado);
+    public List<CanchaEntity> findByPais(String pais) {
+        return canchaRepository.findByPais(pais);
+    }
+
+    @Override
+    public List<CanchaEntity> findByCiudadAndCategoria(String ciudad, String categoria) {
+        return canchaRepository.findByCiudadAndCategoria(ciudad, categoria);
+    }
+
+    @Override
+    public List<CanchaEntity> findByPrecioHoraLessThanEqual(BigDecimal precio) {
+        return canchaRepository.findByPrecioHoraLessThanEqual(precio);
     }
 }

@@ -1,6 +1,7 @@
 package com.micancha.entity;
 
-import jakarta.persistence.*;import java.math.BigDecimal;
+import jakarta.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "canchas")
@@ -13,7 +14,7 @@ public class CanchaEntity {
     @Column(nullable = false, length = 120)
     private String nombre;
 
-    @Column(nullable = false, length = 500, name = "imagen_url")
+    @Column(name = "imagen_url", nullable = false, length = 500)
     private String imagenUrl;
 
     @Column(nullable = false, length = 1000)
@@ -22,7 +23,7 @@ public class CanchaEntity {
     @Column(nullable = false, length = 500)
     private String direccion;
 
-    @Column(nullable = false, length = 500, name = "direccion_url")
+    @Column(name = "direccion_url", nullable = false, length = 500)
     private String direccionUrl;
 
     @Column(nullable = false, length = 80)
@@ -34,13 +35,42 @@ public class CanchaEntity {
     @Column(nullable = false, length = 80)
     private String categoria;
 
-    @Column(precision = 10, scale = 2, nullable = false, name = "precio_hora")
+    @Column(name = "precio_hora", precision = 10, scale = 2, nullable = false)
     private BigDecimal precioHora;
 
     @Column(nullable = false, length = 20)
-    private String estado;
+    private String estado = "ACTIVA";
 
     public CanchaEntity() {
+    }
+
+    public CanchaEntity(String nombre, String imagenUrl, String descripcion, String direccion, String direccionUrl, String pais, String ciudad, String categoria, BigDecimal precioHora, String estado) {
+
+        this.nombre = nombre;
+        this.imagenUrl = imagenUrl;
+        this.descripcion = descripcion;
+        this.direccion = direccion;
+        this.direccionUrl = direccionUrl;
+        this.pais = pais;
+        this.ciudad = ciudad;
+        this.categoria = categoria;
+        this.precioHora = precioHora;
+        this.estado = estado;
+    }
+
+    public CanchaEntity(Long id, String nombre, String imagenUrl, String descripcion, String direccion, String direccionUrl, String pais, String ciudad, String categoria, BigDecimal precioHora, String estado) {
+
+        this.id = id;
+        this.nombre = nombre;
+        this.imagenUrl = imagenUrl;
+        this.descripcion = descripcion;
+        this.direccion = direccion;
+        this.direccionUrl = direccionUrl;
+        this.pais = pais;
+        this.ciudad = ciudad;
+        this.categoria = categoria;
+        this.precioHora = precioHora;
+        this.estado = estado;
     }
 
     public Long getId() {
