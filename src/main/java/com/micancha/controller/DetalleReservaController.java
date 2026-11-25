@@ -19,20 +19,21 @@ public class DetalleReservaController {
     public DetalleReservaController(DetalleReservaServiceJPA detalleReservaServiceJPA) {
         this.detalleReservaServiceJPA = detalleReservaServiceJPA;
     }
+
     @GetMapping
     public ResponseEntity<List<DetalleReservaDto>> getAll() {
         return ResponseEntity.ok(this.detalleReservaServiceJPA.getAll());
     }
 
-        @GetMapping("/{id}")
-        public ResponseEntity<DetalleReservaDto> getById (@PathVariable Long id){
-            DetalleReservaDto responseDto = this.detalleReservaServiceJPA.getById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<DetalleReservaDto> getById (@PathVariable Long id){
+        DetalleReservaDto responseDto = this.detalleReservaServiceJPA.getById(id);
 
-            if (responseDto == null) {
-                return ResponseEntity.notFound().build();
-            }
-            return ResponseEntity.ok(responseDto);
+        if (responseDto == null) {
+            return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.ok(responseDto);
+    }
 }
 /*
     @GetMapping("/mostrarreservas")

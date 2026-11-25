@@ -1,13 +1,15 @@
 package com.micancha.service;
 
 import com.micancha.dto.DetalleReservaDto;
+import com.micancha.dto.ReservaDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 public interface DetalleReservaService {
-    List<DetalleReservaDto> getAll();
-    DetalleReservaDto getById(Long id);
-    DetalleReservaDto save(DetalleReservaDto detalleReservaDto);
-    DetalleReservaDto update(Long id, DetalleReservaDto detalleReservaDto);
-    void delete(Long id);
+    Page<DetalleReservaDto> getAll(String email, Pageable pageable);
+    DetalleReservaDto getById(Long id, String email);
+    DetalleReservaDto save(ReservaDto reservaDto, String email);
+    DetalleReservaDto update(Long id, ReservaDto reservaDto, String email);
+    void delete(Long id,String email);
 }
