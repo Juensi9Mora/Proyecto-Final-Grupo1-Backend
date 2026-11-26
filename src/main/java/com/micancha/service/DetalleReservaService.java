@@ -7,9 +7,9 @@ import org.springframework.data.domain.Pageable;
 
 
 public interface DetalleReservaService {
-    Page<DetalleReservaDto> getAll(String email, Pageable pageable);
-    DetalleReservaDto getById(Long id, String email);
-    DetalleReservaDto save(ReservaDto reservaDto, String email);
-    DetalleReservaDto update(Long id, ReservaDto reservaDto, String email);
-    void delete(Long id,String email);
+    Page<DetalleReservaDto> getAll(Pageable pageable);
+    DetalleReservaDto getById(Long id);
+    DetalleReservaDto save(ReservaDto reservaDto, Long usuarioId);
+    DetalleReservaDto update(Long id, ReservaDto reservaDto);
+    void delete(Long id);
 }

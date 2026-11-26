@@ -3,7 +3,7 @@ package com.micancha.emuns;
 public enum EstadoReserva {
     PENDIENTE,
     CONFIRMADA,
-    //CANCELADA,
+    CANCELADA,
     EN_CURSO,
     COMPLETADA
 }

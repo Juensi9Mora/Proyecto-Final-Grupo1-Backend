@@ -50,4 +50,11 @@ public class DetalleReservaEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cancha_id", nullable = false)
     private CanchaEntity cancha;
+
+    @Transient
+    public LocalTime getHoraFin() {
+        return horaInicio.plusHours(cantidadHoras);
+    }
 }
+
+

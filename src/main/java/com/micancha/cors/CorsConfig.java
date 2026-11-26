@@ -1,4 +1,5 @@
-package com.micancha.config;
+/*
+package com.micancha.cors;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -18,4 +19,4 @@ public class CorsConfig implements WebMvcConfigurer {
                 .maxAge(3600);
     }
 }
-
+*/

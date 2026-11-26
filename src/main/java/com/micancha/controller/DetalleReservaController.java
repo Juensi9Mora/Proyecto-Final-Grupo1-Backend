@@ -1,17 +1,21 @@
 package com.micancha.controller;
 
 import com.micancha.dto.DetalleReservaDto;
+import com.micancha.dto.ReservaDto;
 import com.micancha.service.DetalleReservaServiceJPA;
+import jakarta.validation.Valid;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.net.URI;
+
 
 @RestController
-@RequestMapping("/detalle-reserva")
+@RequestMapping("/reservas")
 public class DetalleReservaController {
 
     private final DetalleReservaServiceJPA detalleReservaServiceJPA;
@@ -21,32 +25,33 @@ public class DetalleReservaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DetalleReservaDto>> getAll() {
-        return ResponseEntity.ok(this.detalleReservaServiceJPA.getAll());
+    public PagedModel<DetalleReservaDto> getAll(@PageableDefault(size = 10, sort = "fechaReserva",
+                                                        direction = Sort.Direction.ASC) Pageable pageable) {
+        return new PagedModel<>(detalleReservaServiceJPA.getAll(pageable));
+
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DetalleReservaDto> getById (@PathVariable Long id){
-        DetalleReservaDto responseDto = this.detalleReservaServiceJPA.getById(id);
+    public DetalleReservaDto getById(@PathVariable Long id) {
+        return detalleReservaServiceJPA.getById(id);
+    }
 
-        if (responseDto == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(responseDto);
+    @PostMapping
+    public ResponseEntity<DetalleReservaDto> save(@Valid @RequestBody ReservaDto dto,
+                                                  @RequestParam Long usuarioId) {
+        DetalleReservaDto creada = detalleReservaServiceJPA.save(dto, usuarioId);
+        return ResponseEntity.created(URI.create("/api/reservas/" + creada.canchaId())).body(creada);
+    }
+
+    @PutMapping("/{id}")
+    public DetalleReservaDto update(@PathVariable Long id, @Valid @RequestBody ReservaDto dto) {
+        return detalleReservaServiceJPA.update(id, dto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        detalleReservaServiceJPA.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
-/*
-    @GetMapping("/mostrarreservas")
-    public ResponseEntity<MensajeDto> getAll() {
-        MensajeDto mensaje = new MensajeDto();
-        List<DetalleReservaDto> list;
-        list = this.detalleReservaServiceJPA.getAll();
-
-        mensaje.setCode("0");
-        mensaje.setMensaje("Lista de reservas");
-        mensaje.setDato(list);
-
-        return ResponseEntity.ok(mensaje);
-    }
-    */
 
