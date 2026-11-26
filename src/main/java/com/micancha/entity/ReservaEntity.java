@@ -25,6 +25,6 @@ public class ReservaEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
-    private DetalleReservaEntity detalleReservaEntity;
+    private UsuarioEntity usuarioEntity;
 
 }

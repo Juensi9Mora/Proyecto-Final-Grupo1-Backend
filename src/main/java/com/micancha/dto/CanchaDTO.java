@@ -15,6 +15,7 @@ public class CanchaDTO {
     private String ciudad;
     private String categoria;
     private BigDecimal precioHora;
+    private String estado;
 
     public CanchaDTO() {
     }
@@ -23,7 +24,7 @@ public class CanchaDTO {
                      String descripcion, String direccion,
                      String direccionUrl, String pais,
                      String ciudad, String categoria,
-                     BigDecimal precioHora) {
+                     BigDecimal precioHora, String estado) {
 
         this.id = id;
         this.nombre = nombre;
@@ -35,6 +36,7 @@ public class CanchaDTO {
         this.ciudad = ciudad;
         this.categoria = categoria;
         this.precioHora = precioHora;
+        this.estado = estado;
     }
 
     public static CanchaDTO fromEntity(CanchaEntity cancha) {
@@ -49,7 +51,8 @@ public class CanchaDTO {
                 cancha.getPais(),
                 cancha.getCiudad(),
                 cancha.getCategoria(),
-                cancha.getPrecioHora()
+                cancha.getPrecioHora(),
+                cancha.getEstado()
         );
     }
 
@@ -66,8 +69,16 @@ public class CanchaDTO {
                 this.ciudad,
                 this.categoria,
                 this.precioHora,
-                "ACTIVA"
+                this.estado
         );
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public Long getId() {

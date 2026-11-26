@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
@@ -39,11 +40,21 @@ public class DetalleReservaEntity {
     @Column(nullable = false, length = 45)
     private String estado;
 
+    @Column(name = "fecha_reserva", nullable = false, length = 45)
+    private LocalDate fechaReserva;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "reserva_id", nullable = false)
-    private ReservaEntity reservaEntity;
+    private ReservaEntity reserva;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cancha_id", nullable = false)
-    private CanchaEntity canchaEntity;
+    private CanchaEntity cancha;
+
+    @Transient
+    public LocalTime getHoraFin() {
+        return horaInicio.plusHours(cantidadHoras);
+    }
 }
+
+
